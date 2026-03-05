@@ -1,0 +1,50 @@
+projection implementation in class zjkr_bp_c_customer unique;
+strict ( 2 );
+extensible;
+use draft;
+use side effects;
+define behavior for ZJKR_C_CUSTOMER alias Customer
+extensible
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+
+  use association _CustomerPhone { create; with draft;}
+  use association _CustomerEmail {create; with draft;}
+
+
+}
+
+define behavior for zjkr_c_cust_phone alias CustomerPhone
+use etag
+{
+    use update;
+    use delete;
+
+    side effects {
+        field Country affects field CountryPrefix;
+        field DefaultPhone affects entity _Customer._CustomerPhone;
+    }
+
+    use association _Customer { with draft; }
+
+}
+
+define behavior for zjkr_c_cust_email alias CustomerEmail
+use etag
+{
+   use update;
+   use delete;
+
+   use association _Customer { with draft; }
+	
+}

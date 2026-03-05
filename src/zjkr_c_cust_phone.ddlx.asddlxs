@@ -1,0 +1,66 @@
+@Metadata.layer: #CUSTOMER
+annotate entity ZJKR_C_CUST_PHONE
+    with 
+{
+
+    @UI.facet: [  
+        { id:  'Phone',
+          purpose:  #STANDARD,
+          type:  #IDENTIFICATION_REFERENCE,
+          label:         'Phone',
+          position:      10
+         }
+    ]
+    
+    @UI.identification: [{          
+        position: 10
+    }]
+    @Search.defaultSearchElement: true
+    @UI.lineItem: [{  
+        position: 10,
+        qualifier: 'Phone'
+    }]    
+    PhoneID;
+
+    
+    @UI.identification: [{          
+        position: 20
+    }]
+    @UI.lineItem: [{  
+        position: 20,
+        qualifier: 'Phone'
+    }]
+    Country;
+    
+    @UI.identification: [{          
+        position: 30
+    }]
+    @UI.lineItem: [{  
+        position: 30,
+        qualifier: 'Phone'
+    }]
+    CountryPrefix;
+    
+    @UI.identification: [{          
+        position: 40
+    }]
+    @UI.lineItem: [{  
+        position: 40,
+        qualifier: 'Phone'
+    }]
+    PhoneNo;
+    
+    @UI.identification: [{          
+        position: 50
+    }]
+    @UI.lineItem: [{  
+        position: 50,
+        qualifier: 'Phone'
+    }]
+    DefaultPhone;
+    
+    @UI.hidden: true
+    LastChangedAt;
+ 
+    
+}

@@ -1,0 +1,14 @@
+@EndUserText: {
+  label: 'Service Definition for ZJKR_C_CUSTOMER'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZJKR_C_CUSTOMER'
+  }
+}
+define service ZJKR_UI_CUSTOMER_O4
+  provider contracts odata_v4_ui {
+  expose ZJKR_C_CUSTOMER   as Customer;
+  expose ZJKR_C_CUST_PHONE as CustomerPhones;
+  expose zjkr_c_cust_email as CustomerEmails;
+}

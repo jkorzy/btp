@@ -1,0 +1,229 @@
+@Metadata.layer: #CORE
+@UI.headerInfo.title.type: #AS_CONNECTED_FIELDS
+@UI.headerInfo.title.valueQualifier: 'HeaderDescription'
+@UI.headerInfo.description.type: #STANDARD
+@UI.headerInfo.description.value: 'CustomerID'
+
+annotate view ZJKR_C_CUSTOMER with
+{
+
+  @UI.facet: [ 
+  
+
+//Body  
+  
+  {
+    label: 'General Information', 
+    id: 'GeneralInfo', 
+    purpose: #STANDARD, 
+    position: 10 , 
+    type: #COLLECTION
+  },
+  {  
+    label: 'Contact',
+    id: 'Contact',
+    purpose: #STANDARD,
+    position: 20,
+    type: #COLLECTION
+  },
+  {  
+    label: 'Audit Data',
+    id: 'AuditData',
+    position: 30,
+    type: #COLLECTION,
+    purpose: #STANDARD
+  },
+  { 
+    id: 'MasterData',
+    type: #FIELDGROUP_REFERENCE,
+    label: 'Master Data',
+    parentId: 'GeneralInfo',
+    position: 10,
+    targetQualifier: 'MasterData'
+  },  
+  { 
+    id: 'Address',
+    type: #FIELDGROUP_REFERENCE,
+    label: 'Address',
+    parentId: 'GeneralInfo',
+    position: 20,
+    targetQualifier: 'Address'
+  },
+  { id: 'Phone', 
+    type: #LINEITEM_REFERENCE,
+    label: 'Phone Numbers',
+    position: 10,
+    targetQualifier: 'Phone',
+    parentId: 'Contact',
+    targetElement: '_CustomerPhone'
+  },
+  { id: 'Email', 
+    type: #LINEITEM_REFERENCE,
+    label: 'E-Mails',
+    position: 20,
+    targetQualifier: 'Email',
+    parentId: 'Contact',
+    targetElement: '_CustomerEmail'
+  },
+  { 
+    id: 'Audit',
+    type: #FIELDGROUP_REFERENCE,
+    label: 'Audit Data',
+    parentId: 'AuditData',
+    position: 10,
+    targetQualifier: 'Audit'
+  }     
+  ]
+  
+  @UI.lineItem: [ {
+    position: 10 
+  } ]
+  @UI.selectionField: [ {
+    position: 10 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'MasterData',
+    position: 10
+  }]
+  CustomerID;
+  
+
+  @UI.lineItem: [ {
+    position: 20 
+  } ]
+  @UI.selectionField: [ {
+    position: 20 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'MasterData',
+    position: 20
+  }]  
+  @UI.connectedFields: [{  
+    qualifier: 'HeaderDescription',
+    name: 'Name1',
+    template: '{Name1} {Name2}'    
+  }]
+    
+  Name1;
+  
+
+  @UI.fieldGroup: [{  
+    qualifier: 'MasterData',
+    position: 30
+  }]
+  @UI.connectedFields: [{  
+    qualifier: 'HeaderDescription',
+    name: 'Name2'
+  }]  
+  Name2;
+  
+
+  @UI.lineItem: [ {
+    position: 40 
+  } ]
+  @UI.selectionField: [ {
+    position: 40 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Address',
+    position: 10
+  }]
+  Street;
+  
+
+  @UI.lineItem: [ {
+    position: 50 
+  } ]
+  @UI.selectionField: [ {
+    position: 50 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Address',
+    position: 20
+  }]  
+  HouseNo;
+  
+  @UI.lineItem: [ {
+    position: 60 
+  } ]
+  @UI.selectionField: [ {
+    position: 60 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Address',
+    position: 30
+  }]  
+  City;
+  
+
+  @UI.lineItem: [ {
+    position: 70 
+  } ]
+  @UI.selectionField: [ {
+    position: 70 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Address',
+    position: 40
+  }]  
+  PostCode;
+  
+
+  @UI.lineItem: [ {
+    position: 80 
+  } ]
+  @UI.selectionField: [ {
+    position: 80 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Address',
+    position: 50
+  }]  
+  Country;
+  
+
+  @UI.selectionField: [ {
+    position: 90 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Audit',
+    position: 10
+  }]  
+  CreatedBy;
+  
+
+  @UI.selectionField: [ {
+    position: 100 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Audit',
+    position: 20
+  }]  
+  CreatedAt;
+  
+
+  @UI.selectionField: [ {
+    position: 110 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Audit',
+    position: 30
+  }]    
+  LocalLastChangedBy;
+  
+
+  @UI.selectionField: [ {
+    position: 120 
+  } ]
+  @UI.fieldGroup: [{  
+    qualifier: 'Audit',
+    position: 40
+  }]    
+  LocalLastChangedAt;
+  
+
+  @UI.hidden: true
+  LastChangeAt;
+  
+
+}

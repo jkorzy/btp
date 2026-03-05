@@ -1,0 +1,11 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "SAP Object Node Type ZJKR_CUSTOMER",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "name": "ZJKR_CUSTOMER",
+  "sapObjectType": "ZJKR_CUSTOMER",
+  "rootNode": true
+}

@@ -1,0 +1,129 @@
+managed implementation in class ZJKR_BP_R_CUSTOMER unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZJKR_R_CUSTOMER alias Customer
+persistent table ZJKR_CUSTOMER
+extensible
+draft table ZJKR_CUSTOMER_D
+etag master LocalLastChangedAt
+lock master total etag LastChangeAt
+early numbering
+authorization master( global )
+{
+  field ( readonly )
+   CustomerID;
+  field ( readonly )
+   CreatedBy,
+   CreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangeAt;
+  field ( mandatory )
+  Name1,
+  Street,
+  HouseNo,
+  City,
+  PostCode,
+  Country;
+  create;
+  update;
+  delete;
+
+  association _CustomerPhone { create ; with draft;}
+  association _CustomerEmail { create ; with draft;}
+
+  validation validateMandatory on save { create; field Name1, Street, HouseNo, City, PostCode, Country; }
+
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare{
+    validation validateMandatory;
+  }
+  mapping for ZJKR_CUSTOMER corresponding extensible
+  {
+    CustomerID = customer_id;
+    Name1 = name_1;
+    Name2 = name_2;
+    Street = street;
+    HouseNo = house_no;
+    City = city;
+    PostCode = post_code;
+    Country = country;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangeAt = last_change_at;
+
+  }}
+
+
+  define behavior for zjkr_r_cust_phone alias CustomerPhone
+  persistent table zjkr_cust_phone
+  draft table zjkr_cust_phoned
+  etag master LastChangedAt
+  lock dependent by _Customer
+  early numbering
+  authorization dependent by _Customer
+  {
+
+    field (readonly)
+      CustomerID,
+      PhoneID,
+      CountryPrefix;
+
+    update;
+    delete;
+
+    determination getCountryPrefix on modify { field Country; }
+    determination defaultPhone on modify { field DefaultPhone; }
+
+    validation checkDefault on save { field DefaultPhone; }
+
+    association _Customer {with draft;}
+
+    mapping for zjkr_cust_phone corresponding
+    {
+        CustomerID = customer_id;
+        PhoneID = phone_id;
+        Country = country;
+        CountryPrefix = country_prefix;
+        DefaultPhone = default_phone;
+        PhoneNo = phone_no;
+        LastChangedAt = last_changed_at;
+
+    }
+
+  }
+
+  define behavior for zjkr_r_cust_email alias CustomerEmail
+  persistent table zjkr_cust_email
+  draft table zjkr_cust_emaild
+  etag master LastChangedAt
+  lock dependent by _Customer
+  early numbering
+  authorization dependent by _Customer
+  {
+    field (readonly)
+        CustomerId,
+        EmailId;
+
+    update;
+    delete;
+
+    association _Customer {with draft;}
+
+    mapping for zjkr_cust_email corresponding
+    {
+        CustomerId = customer_id;
+        EmailId = email_id;
+        Email = email;
+        DefaultEmail = default_email;
+        LastChangedAt = last_changed_at;
+    }
+
+  }
